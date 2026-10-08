@@ -29,11 +29,12 @@ python -m benchmarks.run_benchmark --workload results/warmup.jsonl \
   --model "$MODEL" --out-dir results/warmup > /dev/null
 
 for S in A B; do
+  WL="results/${TAG}_workload_${S}.jsonl"
   python -m workload.generator --scenario "${SCEN[$S]}" --num-requests "$N" \
-    --rate "$RATE" --seed 0 --out "results/workload_${S}.jsonl"
+    --rate "$RATE" --seed 0 --out "$WL"
   for i in $(seq 1 "$RUNS"); do
     echo "=== ${TAG} scenario ${S} run ${i}/${RUNS} ==="
-    python -m benchmarks.run_benchmark --workload "results/workload_${S}.jsonl" \
+    python -m benchmarks.run_benchmark --workload "$WL" \
       --model "$MODEL" --out-dir "results/${TAG}_${S}_run${i}" > /dev/null
   done
 done
