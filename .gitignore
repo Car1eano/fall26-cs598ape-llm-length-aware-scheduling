@@ -218,3 +218,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------
+# Project-specific (CS598APE length-aware scheduling)
+# ---------------------------------------------------------------
+
+# macOS
+.DS_Store
+
+# Server / benchmark logs (also covered by *.log above)
+server.log
+bench.log
+
+# Large per-request raw results; keep summary.json and *_summary.txt
+results/*/raw_results.jsonl
+
+# Warm-up and smoke-test outputs
+results/warmup*
+results/smoke*
