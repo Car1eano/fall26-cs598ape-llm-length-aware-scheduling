@@ -4,7 +4,7 @@ import statistics
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path("gpu_experiments/results")
+ROOT = Path("report_analysis/raw_results")
 OUT = Path("report_analysis")
 
 SCENARIOS = [
