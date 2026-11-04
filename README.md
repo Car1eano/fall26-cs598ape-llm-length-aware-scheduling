@@ -1,215 +1,324 @@
 # Length-Aware Request Scheduling for vLLM
 
-CS598 Advanced Performance Engineering, Fall 2026
+**CS598 Advanced Performance Engineering — Fall 2026**
 
-Team:
-- Carleano Chang (poching2)
-- Christine Liou (ycliou2)
+**Team**
+- Carleano Chang (`poching2`)
+- Christine Liou (`ycliou2`)
 
-## Project Goal
+## 1. Project Overview
 
-Study how request ordering affects LLM inference serving performance.
-We compare vLLM's default FCFS scheduling with a planned length-aware
-scheduler and a fairness mechanism based on aging or maximum wait time.
+Large Language Model (LLM) inference requests have different prompt and output lengths. Under heavy load, request scheduling affects responsiveness, latency, and throughput.
 
-Metrics include throughput, Time to First Token (TTFT), and end-to-end
-latency at P50, P95, and P99.
+This project investigates length-aware scheduling for vLLM. We compare native scheduling with custom policies that prioritize shorter estimated requests and use waiting-time-based priority adjustments.
 
-## Current Progress
+Our objective is to understand the trade-offs between short-request responsiveness, long-request latency, and overall throughput.
 
-Completed:
-- Working vLLM CPU inference server.
-- Synthetic workload generator with Poisson arrivals.
-- Streaming benchmark client and metric collection.
-- Aggregation of results across repeated runs.
-- 35 passing unit tests.
-- FCFS baseline experiments with uniform and mixed request lengths.
-- Validation of 300 requests in the concurrency-limited baseline:
-  zero failed requests and zero output-token-count mismatches.
+The project includes scheduler implementations, synthetic workload generation, unit tests, GPU experiments, statistical analysis, and reproducible benchmark summaries.
 
-Not yet implemented:
-- Length-aware scheduling.
-- Aging or maximum-wait-time fairness mechanism.
-- Fairness metrics and larger workload experiments.
+## 2. Scheduling Policies
 
-## Experiment Environment
+Five policies are evaluated in the main GPU experiments.
+
+| Policy | Description |
+|---|---|
+| Native FCFS | Baseline using vLLM's native FCFS scheduling configuration |
+| Queue-Only | Reorders waiting requests by estimated request length |
+| Aging alpha=0.1 | Length-aware priority adjusted using waiting time, with alpha=0.1 |
+| Aging alpha=0.5 | Length-aware priority adjusted using waiting time, with alpha=0.5 |
+| Hybrid | Conditional length-aware and aging-based scheduling |
+
+The Queue-Only implementation estimates request length using the prompt-token count and requested maximum output-token count.
+
+Waiting requests are reordered before the underlying vLLM scheduler performs scheduling.
+
+The aging-based implementation uses a priority heuristic based on estimated request length and elapsed waiting time.
+
+These heuristics aim to improve responsiveness and mitigate long-request delays, but do not provide a formal starvation-freedom guarantee.
+
+## 3. Repository Structure
+
+| Path | Description |
+|---|---|
+| `gpu_experiments/` | GPU scheduler implementations and smoke-test scripts |
+| `report_analysis/analyze.py` | Main benchmark aggregation and audit |
+| `report_analysis/plot_results.py` | Performance figure generation |
+| `report_analysis/sensitivity_analysis.py` | Analysis of an anomalous Queue-Only run |
+| `report_analysis/raw_results/` | Preserved GPU benchmark summary JSON files |
+| `report_analysis/figures/` | Performance figures in PDF and PNG formats |
+| `tests/` | Workload, metrics, aggregation, and scheduler unit tests |
+| `workload/` | Synthetic workload generation |
+| `benchmarks/` | Streaming benchmark client and metric collection |
+| `scripts/` | Preliminary CPU baseline scripts |
+| `results/` | Historical CPU experiment results |
+| `artifacts/` | Archived experiment artifacts |
+
+## 4. Experimental Environments
+
+### 4.1 Preliminary CPU Experiments
+
+The initial baseline experiments used the following environment:
 
 | Component | Configuration |
-|-----------|---------------|
-| OS | Ubuntu 26.04.1 LTS |
-| CPU | Intel Xeon Silver 4216 @ 2.10 GHz, 4 vCPUs |
-| RAM | Approximately 15 GiB |
-| GPU | None |
+|---|---|
+| Operating system | Ubuntu 26.04.1 LTS |
+| CPU | Intel Xeon Silver 4216 |
+| Available CPU resources | 4 vCPUs |
+| Memory | Approximately 15 GiB |
 | Python | 3.12.15 |
 | vLLM | 0.31.0+cpu |
 | Model | Qwen/Qwen2.5-0.5B-Instruct |
-| Model dtype | float32 |
-| KV-cache allocation | 4 GiB |
-| CPU thread binding | Cores 0-2 |
-| Scheduling policy | FCFS |
+| GPU | None |
 
-Prefix caching and chunked prefill were enabled in these experiments.
-Results describe this CPU environment and should not be generalized
-directly to GPU serving.
+These experiments validated the workload generator, benchmark client, metrics collection, and FCFS baseline.
 
-## Repository Structure
+### 4.2 Main GPU Experiments
 
-- `scripts/`: server startup and baseline experiment scripts.
-- `workload/`: synthetic request generation and workload scenarios.
-- `benchmarks/`: streaming client, metrics, and result aggregation.
-- `tests/`: unit tests.
-- `results/`: workloads, per-run summaries, and aggregate tables.
+The main scheduling comparisons were conducted on a shared GPU server.
 
-## Workloads
+| Component | Configuration |
+|---|---|
+| GPU | NVIDIA RTX 5090 |
+| vLLM | 0.26.0 |
+| Model | Qwen/Qwen2.5-0.5B-Instruct |
+| Requests per run | 900 |
+| Target arrival rate | 30 requests/second |
+| Workload type | Synthetic mixed-length requests |
 
-Requests use Poisson arrivals and workload seed 0.
+The preliminary CPU and main GPU experiments used different hardware and vLLM versions. Their absolute performance measurements should not be directly compared.
 
-| Scenario | Request mix | Approximate prompt tokens | Output tokens |
-|----------|-------------|---------------------------|---------------|
-| A_uniform | All medium | 64 | 64 |
-| B_mixed | 80% short | 32 | 16 |
-| B_mixed | 20% long | 256 | 128 |
+### 4.3 GPU Smoke-Test Configuration
 
-Prompt lengths are approximate because prompts use repeated filler text.
-The benchmark requests temperature 0 and ignore_eos to control output
-length.
+The repository includes:
 
-For the 50-request mixed workload used here, the realized mix was
-37 short and 13 long requests.
+- `gpu_experiments/start_gpu_smoke_test.sh`
+- `gpu_experiments/start_length_aware_smoke_test.sh`
 
-## Setup
+The scripts configure local vLLM servers with the following smoke-test settings:
 
-Use Python 3.12 and `uv` to create the project environment:
+- Model: `Qwen/Qwen2.5-0.5B-Instruct`
+- Data type: `float16`
+- Maximum concurrent sequences: 4
+- Maximum model length: 2048
+- GPU memory utilization: 0.30
+- Eager execution enabled
+- Localhost-only API server
+
+The length-aware smoke-test script also disables prefix caching and specifies a custom scheduler class.
+
+These scripts are preliminary smoke tests. Their settings should not be assumed to exactly reproduce the main 900-request GPU benchmarks.
+
+GPU device allocation and port selection must be coordinated with the administrator of the shared server.
+
+## 5. Workload Design
+
+Synthetic workloads use Poisson request arrivals and two request classes.
+
+| Request class | Approximate prompt length | Requested output length |
+|---|---:|---:|
+| Short | 32 tokens | 16 tokens |
+| Long | 256 tokens | 128 tokens |
+
+The main GPU experiments evaluate two request distributions.
+
+| Scenario | Short requests | Long requests | Total |
+|---|---:|---:|---:|
+| `fairness_900_rate30` | 813 | 87 | 900 |
+| `balanced_900_rate30_seed123` | 455 | 445 | 900 |
+
+Both scenarios use a target arrival rate of 30 requests per second.
+
+## 6. Evaluation Metrics
+
+The benchmark collects:
+
+- Time to First Token (TTFT)
+- End-to-end request latency
+- P50, P95, and P99 latency percentiles
+- Generated output-token throughput
+- Separate short-request and long-request measurements
+
+TTFT includes queueing and processing overhead and is not a direct measurement of queue waiting time alone.
+
+Aggregate results are arithmetic means of per-run measurements. The analysis also reports sample standard deviations.
+
+Percentiles are computed within each run and then averaged across runs, rather than calculated from pooled requests.
+
+## 7. Main GPU Results
+
+### 7.1 Fairness Workload: Approximately 90% Short Requests
+
+| Policy | Runs | Throughput (tokens/s) | Short P95 TTFT (s) | Long P95 TTFT (s) |
+|---|---:|---:|---:|---:|
+| Native FCFS | 3 | 573.74 | 10.107 | 10.056 |
+| Queue-Only | 5 | 561.64 | 0.590 | 19.012 |
+| Aging alpha=0.1 | 3 | 553.64 | 0.644 | 19.551 |
+| Aging alpha=0.5 | 5 | 573.04 | 0.680 | 18.266 |
+| Hybrid | 3 | 560.01 | 0.629 | 18.880 |
+
+Queue-Only reduces short-request P95 TTFT by approximately **94.2%** compared with Native FCFS.
+
+However, long-request P95 TTFT increases from approximately 10.06 to 19.01 seconds.
+
+This demonstrates a significant trade-off between short-request responsiveness and long-request latency.
+
+### 7.2 Balanced Workload: Approximately 50% Short Requests
+
+| Policy | Runs | Throughput (tokens/s) | Short P95 TTFT (s) | Long P95 TTFT (s) |
+|---|---:|---:|---:|---:|
+| Native FCFS | 3 | 577.49 | 79.310 | 77.468 |
+| Queue-Only | 5 | 582.80 | 0.664 | 77.282 |
+| Aging alpha=0.1 | 3 | 571.43 | 0.721 | 79.618 |
+| Aging alpha=0.5 | 5 | 585.54 | 1.322 | 76.815 |
+| Hybrid | 3 | 556.50 | 6.315 | 82.219 |
+
+Queue-Only reduces short-request P95 TTFT by approximately **99.2%** compared with Native FCFS.
+
+The effect on long-request latency and throughput depends on the workload and scheduling policy.
+
+These results demonstrate improvements in short-request responsiveness, not universal improvements for all requests.
+
+### 7.3 Performance Figures
+
+The following figures are available in PDF and PNG formats:
+
+- `report_analysis/figures/short_p95_ttft.pdf`
+- `report_analysis/figures/long_p95_ttft.pdf`
+- `report_analysis/figures/throughput.pdf`
+
+The figures compare all five policies across both workload scenarios and include variability across repeated runs.
+
+## 8. Testing
+
+The project has **46 passing unit tests**.
+
+The test suite covers:
+
+- Synthetic workload generation
+- Benchmark metric calculations
+- Statistical aggregation
+- Queue-Only scheduling behavior
+- Aging-based scheduler behavior
+
+Run tests from the repository root using a compatible Python environment:
 
 ```bash
-uv venv --python 3.12 venv
-source venv/bin/activate
-uv pip install aiohttp numpy pytest
+python -m pytest tests/ -v
 ```
 
-Install the vLLM CPU wheel used in these experiments:
+The main GPU experiments provide larger-scale performance evaluation using 900 requests per run.
+
+Unit tests do not establish exhaustive correctness under every runtime configuration, nor do they prove starvation freedom.
+
+## 9. Reproducing the Statistical Analysis
+
+The repository contains 40 preserved GPU benchmark summary files.
+
+Of these, 38 runs are used in the primary policy comparisons. Two additional runs are retained for auditability: an original anomalous Queue-Only run and an instrumented scheduler run.
+
+### 9.1 Install Analysis Dependencies
+
+Use a compatible Python environment with NumPy and Matplotlib:
 
 ```bash
-uv pip install \
-  "https://github.com/vllm-project/vllm/releases/download/v0.31.0/vllm-0.31.0%2Bcpu-cp38-abi3-manylinux_2_39_x86_64.whl" \
-  --torch-backend cpu
+python -m pip install numpy matplotlib
 ```
 
-This wheel requires a compatible Linux x86_64 environment with
-glibc 2.39 or newer. A C++ compiler is also required for CPU startup
-compilation. On the course VM, it was installed with:
+The aggregation and sensitivity-analysis scripts use Python standard-library modules.
 
-```bash
-sudo apt update
-sudo apt install -y build-essential
-```
-
-## Run Unit Tests
+### 9.2 Generate Statistical Summaries
 
 From the repository root:
 
 ```bash
-source venv/bin/activate
-python -m pytest tests/ -v
+python report_analysis/analyze.py
 ```
 
-Verified result: 35 passed.
+This generates:
 
-These tests cover workload generation, metric calculation, and
-aggregation. They do not yet validate a custom scheduler.
+- `report_analysis/individual_runs.csv`
+- `report_analysis/summary_statistics.csv`
+- `report_analysis/run_audit.csv`
 
-## Reproduce the Concurrency-Limited FCFS Baseline
-
-Run all commands from the repository root.
-
-Start the server in a background tmux session:
+### 9.3 Generate Performance Figures
 
 ```bash
-tmux new -d -s server \
-  "env MAX_NUM_SEQS=4 bash scripts/start_server.sh 2>&1 | tee server.log"
+python report_analysis/plot_results.py
 ```
 
-Wait until `server.log` contains `Application startup complete`.
+This generates the short-request TTFT, long-request TTFT, and throughput comparison figures.
 
-Confirm that the running command includes `--max-num-seqs 4`:
+### 9.4 Run Sensitivity Analysis
 
 ```bash
-ps -eo pid,args | grep '[v]llm serve'
+python report_analysis/sensitivity_analysis.py
 ```
 
-Run 50 requests per scenario at an average arrival rate of 1 request
-per second, with three repetitions per scenario:
+This generates:
 
-```bash
-tmux new -d -s bench_cap4 \
-  "TAG=fcfs_cap4 bash scripts/run_baseline.sh 50 1.0 3 2>&1 | tee bench_cap4.log"
-```
+- `report_analysis/sensitivity_analysis.csv`
 
-Monitor progress:
+These commands reproduce the reported statistical analysis using the preserved JSON summaries, without requiring access to the original GPU server.
 
-```bash
-tail -f bench_cap4.log
-```
+They do not rerun the GPU inference experiments themselves.
 
-Use a new TAG when repeating experiments to avoid overwriting previous
-results. Server and benchmark log filenames should also be changed or
-backed up when preserving an earlier run.
+## 10. Sensitivity Analysis
 
-## Preliminary Results
+One original Queue-Only run in the Fairness workload showed noticeably lower throughput than the other repetitions.
 
-The following values are arithmetic means of the per-run metrics
-across three repetitions. Percentiles are averaged across runs,
-rather than computed from pooled requests. Times are in seconds.
-Throughput is measured in output tokens per second.
+Both the original run and its retest are preserved.
 
-| Scenario | Group | TTFT P50 | TTFT P95 | TTFT P99 | Latency P50 | Latency P95 | Latency P99 | Tokens/s |
-|----------|-------|----------|----------|----------|-------------|-------------|-------------|----------|
-| A | overall | 21.49 | 33.57 | 34.76 | 28.79 | 40.82 | 42.05 | 31.8 |
-| B | overall | 11.93 | 17.63 | 19.30 | 16.02 | 29.11 | 31.13 | 26.3 |
-| B | short | 11.82 | 18.02 | 19.54 | 13.58 | 20.37 | 21.54 | — |
-| B | long | 12.04 | 15.31 | 15.51 | 26.00 | 31.05 | 31.43 | — |
+| Run selection | Throughput (tokens/s) | Short P95 TTFT (s) | Long P95 TTFT (s) |
+|---|---:|---:|---:|
+| Original five runs | 547.73 | 0.637 | 19.997 |
+| Retest five runs | 561.64 | 0.590 | 19.012 |
+| All six runs | 549.12 | 0.633 | 19.885 |
 
-Validation:
-- Two scenarios, three runs each, 50 requests per run.
-- 300 recorded requests.
-- Zero failed requests.
-- Every recorded output-token count matched the requested max_tokens.
-- Maximum sampled Running count: 4.
-- Maximum sampled Waiting count: 18.
+The primary comparison uses the retest instead of the anomalous original run.
 
-The sampled queue statistics confirm that waiting occurred under the
-concurrency limit. TTFT includes queueing, prefill, and other overhead;
-it is not a direct measurement of queue wait time.
+The short-request improvement relative to FCFS remains substantial under all three selections.
 
-These results establish an FCFS baseline. They do not yet demonstrate
-an improvement from length-aware scheduling.
+The original measurement is retained rather than deleted, allowing the effect of this selection to be independently examined.
 
-## Result Files
+## 11. Preliminary CPU Baseline
 
-- `results/fcfs_*`: initial baseline at 0.5 requests/s without an
-  explicitly configured concurrency limit.
-- `results/load_fcfs_*`: earlier experiment at 1.0 requests/s.
-  The intended concurrency limit of 4 was not applied.
-- `results/fcfs_cap4_*`: validated experiment at 1.0 requests/s
-  with max_num_seqs=4.
-- `fcfs_cap4_artifact.tar.gz`: snapshot containing scripts, benchmark
-  code, tests, cap4 results, and logs.
+Before implementing the GPU schedulers, we established a concurrency-limited CPU FCFS baseline.
 
-Raw per-request results and logs are excluded from normal Git tracking
-by `.gitignore`; a snapshot is included in the artifact archive.
-Download a copy of the archive before the course VM is removed.
+The validated preliminary experiments used:
 
-## Limitations and Next Steps
+- Two workload scenarios
+- Three repetitions per scenario
+- 50 requests per repetition
+- 300 recorded requests
+- Maximum concurrent sequences: 4
 
-Current experiments use a small model, synthetic filler prompts, one
-workload seed, and a CPU-only VM. Repeated prompts can benefit from
-prefix caching. Token-count validation does not establish equality of
-generated token sequences across scheduling policies.
+All 300 recorded requests completed successfully, and the recorded output-token counts matched the requested counts.
 
-Next steps:
-1. Inspect and document vLLM's waiting-queue and admission logic.
-2. Define the request-length estimate and implement length-aware ordering.
-3. Compare FCFS and length-aware scheduling under identical conditions.
-4. Add aging or a maximum-wait-time mechanism.
-5. Evaluate fairness and performance across more arrival rates,
-   workload seeds, and length distributions.
+The CPU baseline used vLLM 0.31.0+cpu and is preserved in the repository's historical `results/` directory.
+
+These measurements were used for initial validation and are not directly compared with the later GPU scheduler results.
+
+## 12. Limitations
+
+The project has several limitations:
+
+1. The experiments use a relatively small LLM.
+2. Synthetic workloads may not represent production request distributions.
+3. The main GPU comparisons cover only two workload distributions and a limited number of repeated runs.
+4. Experiments were performed on shared GPU infrastructure, where external activity may affect measurements.
+5. Prioritizing shorter requests can substantially increase long-request latency.
+6. Aging-based priority heuristics do not formally guarantee starvation freedom.
+7. The preserved JSON summaries support statistical reproducibility but do not include every original per-request trace or runtime log.
+8. The complete main GPU benchmark launch procedure has not yet been packaged into a verified one-command reproduction script.
+
+Results should not be generalized to arbitrary models, hardware configurations, or production workloads.
+
+## 13. Conclusion
+
+Length-aware scheduling can substantially improve short-request responsiveness in LLM serving.
+
+Across the two main 900-request workloads, Queue-Only scheduling reduced short-request P95 TTFT by approximately 94.2% and 99.2% compared with Native FCFS.
+
+However, these gains must be evaluated alongside long-request latency and throughput.
+
+The experiments demonstrate that the effectiveness of a scheduling policy depends on the workload distribution and the performance objective.
