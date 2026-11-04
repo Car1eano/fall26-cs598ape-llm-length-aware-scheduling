@@ -210,6 +210,54 @@ The main GPU experiments provide larger-scale performance evaluation using 900 r
 
 Unit tests do not establish exhaustive correctness under every runtime configuration, nor do they prove starvation freedom.
 
+### 8.1 Running the GPU Benchmark Client
+
+The benchmark runner sends a JSONL workload to an already
+running vLLM OpenAI-compatible completions server.
+
+The runner accepts four arguments:
+
+- `--workload`: input workload JSONL file
+- `--model`: model identifier
+- `--url`: completions API endpoint
+- `--out-dir`: output directory
+
+Example command, after starting a compatible vLLM server:
+
+    python -m benchmarks.run_benchmark \
+      --workload gpu_experiments/results/fairness_900_rate30/workload.jsonl \
+      --model Qwen/Qwen2.5-0.5B-Instruct \
+      --url http://127.0.0.1:8000/v1/completions \
+      --out-dir /tmp/vllm-benchmark-example
+
+Replace the workload path and URL as needed.
+
+The benchmark generates:
+
+- `raw_results.jsonl`: per-request measurements
+- `summary.json`: aggregate performance statistics
+
+The client uses asynchronous HTTP streaming and schedules
+requests according to their specified arrival times.
+
+### GPU Scheduler Implementations
+
+| Policy | Implementation |
+|---|---|
+| Native FCFS | vLLM default scheduler |
+| Queue-Only | `gpu_experiments/length_aware_queue_only_scheduler.py` |
+| Aging alpha=0.1 | `gpu_experiments/adaptive_length_aware_scheduler.py` |
+| Aging alpha=0.5 | Aging scheduler configured with alpha=0.5 |
+| Hybrid | `gpu_experiments/hybrid_conditional_aging_scheduler.py` |
+
+Custom schedulers reorder waiting requests before invoking
+the underlying vLLM scheduling logic.
+
+The existing GPU startup scripts are smoke-test configurations,
+not verified complete reproductions of the formal experiments.
+
+See `gpu_experiments/ENVIRONMENT.md` for environment details.
+
 ## 9. Reproducing the Statistical Analysis
 
 The repository contains 40 preserved GPU benchmark summary files.
