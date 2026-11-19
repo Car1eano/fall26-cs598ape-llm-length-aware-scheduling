@@ -1,0 +1,86 @@
+{
+  "repo_commit": "245dfffdd4cd4b1328c9797ac6b8f0150fe891c9",
+  "plan_seed": 598,
+  "max_num_seqs": 4,
+  "trace_queue": false,
+  "paired_plan": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_formal/formal-0be5c458493145cdb43b397d76833f3e/plan.json",
+  "stages": [
+    [
+      {
+        "block": "balanced-30rps-r4",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 4,
+        "trace_seed": 1428558536,
+        "policy_order": [
+          "profiled_fcfs",
+          "profiled_aging",
+          "profiled_queue",
+          "profiled_optimized_aging"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-30rps-r1",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 1,
+        "trace_seed": 2737803767,
+        "policy_order": [
+          "profiled_optimized_aging",
+          "profiled_queue",
+          "profiled_aging",
+          "profiled_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-30rps-r2",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 2,
+        "trace_seed": 3777107450,
+        "policy_order": [
+          "profiled_fcfs",
+          "profiled_queue",
+          "profiled_aging",
+          "profiled_optimized_aging"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-30rps-r3",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 3,
+        "trace_seed": 2866718783,
+        "policy_order": [
+          "profiled_queue",
+          "profiled_aging",
+          "profiled_fcfs",
+          "profiled_optimized_aging"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-30rps-r5",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 5,
+        "trace_seed": 3566243162,
+        "policy_order": [
+          "profiled_queue",
+          "profiled_optimized_aging",
+          "profiled_aging",
+          "profiled_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      }
+    ]
+  ]
+}

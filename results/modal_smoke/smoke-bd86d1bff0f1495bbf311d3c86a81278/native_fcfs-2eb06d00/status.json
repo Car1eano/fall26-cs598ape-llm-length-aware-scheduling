@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "policy": "native_fcfs",
+  "path": "smoke-bd86d1bff0f1495bbf311d3c86a81278/native_fcfs-2eb06d00",
+  "rows": 8,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true
+}

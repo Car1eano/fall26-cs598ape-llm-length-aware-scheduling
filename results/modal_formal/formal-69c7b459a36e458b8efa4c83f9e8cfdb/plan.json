@@ -1,0 +1,80 @@
+{
+  "repo_commit": "245dfffdd4cd4b1328c9797ac6b8f0150fe891c9",
+  "plan_seed": 598,
+  "max_num_seqs": 16,
+  "paired_plan": "results/modal_formal/formal-0be5c458493145cdb43b397d76833f3e/plan.json",
+  "stages": [
+    [
+      {
+        "block": "balanced-5rps-r4",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 4,
+        "trace_seed": 1885202216,
+        "policy_order": [
+          "aging_alpha05",
+          "native_fcfs",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r5",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 5,
+        "trace_seed": 2623179836,
+        "policy_order": [
+          "aging_alpha05",
+          "queue_only",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r1",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 1,
+        "trace_seed": 1000364615,
+        "policy_order": [
+          "aging_alpha05",
+          "queue_only",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r3",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 3,
+        "trace_seed": 4244763005,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r2",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 2,
+        "trace_seed": 2468212511,
+        "policy_order": [
+          "aging_alpha05",
+          "queue_only",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      }
+    ]
+  ]
+}

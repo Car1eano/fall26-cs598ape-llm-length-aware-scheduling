@@ -1,0 +1,8 @@
+{"id": 16, "bucket": "long", "send_time": 0.00011430800000766794, "first_token_time": 0.11126211500000238, "finish_time": 2.034289612000009, "output_tokens": 128, "error": null}
+{"id": 26, "bucket": "long", "send_time": 0.0005424670000024889, "first_token_time": 0.39120503000000895, "finish_time": 2.305463818000007, "output_tokens": 128, "error": null}
+{"id": 35, "bucket": "long", "send_time": 0.0007762430000042286, "first_token_time": 0.6436944140000094, "finish_time": 2.536340451000001, "output_tokens": 128, "error": null}
+{"id": 54, "bucket": "long", "send_time": 0.0009691460000027519, "first_token_time": 0.391185569000001, "finish_time": 2.3055139810000043, "output_tokens": 128, "error": null}
+{"id": 0, "bucket": "short", "send_time": 0.0011724290000074689, "first_token_time": 0.13266271599999868, "finish_time": 0.3621977070000071, "output_tokens": 16, "error": null}
+{"id": 1, "bucket": "short", "send_time": 0.001382083999999395, "first_token_time": 0.13279474499999822, "finish_time": 0.36183177200000216, "output_tokens": 16, "error": null}
+{"id": 2, "bucket": "short", "send_time": 0.0016606220000028316, "first_token_time": 0.3912196410000064, "finish_time": 0.6151608220000071, "output_tokens": 16, "error": null}
+{"id": 3, "bucket": "short", "send_time": 0.001852705000004562, "first_token_time": 0.13261980400000084, "finish_time": 0.3622739320000079, "output_tokens": 16, "error": null}

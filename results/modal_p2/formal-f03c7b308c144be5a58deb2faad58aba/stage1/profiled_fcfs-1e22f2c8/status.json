@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "profiled_fcfs",
+  "path": "formal-f03c7b308c144be5a58deb2faad58aba/stage1/profiled_fcfs-1e22f2c8",
+  "started_at_unix": 1795106357.2432945,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 362.308592199,
+  "finished_at_unix": 1795106719.551888
+}

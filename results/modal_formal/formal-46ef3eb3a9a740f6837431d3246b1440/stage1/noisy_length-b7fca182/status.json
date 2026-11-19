@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "noisy_length",
+  "path": "formal-46ef3eb3a9a740f6837431d3246b1440/stage1/noisy_length-b7fca182",
+  "started_at_unix": 1795094587.1839442,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 331.534010341,
+  "finished_at_unix": 1795094918.717955
+}

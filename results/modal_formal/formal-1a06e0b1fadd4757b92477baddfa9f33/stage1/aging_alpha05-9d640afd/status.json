@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "aging_alpha05",
+  "path": "formal-1a06e0b1fadd4757b92477baddfa9f33/stage1/aging_alpha05-9d640afd",
+  "started_at_unix": 1795100485.3978312,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 283.29867427,
+  "finished_at_unix": 1795100768.696506
+}

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "profiled_queue",
+  "path": "formal-f03c7b308c144be5a58deb2faad58aba/stage1/profiled_queue-204b4b7c",
+  "started_at_unix": 1795106716.9404395,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 295.05194938500006,
+  "finished_at_unix": 1795107011.9923897
+}

@@ -15,6 +15,9 @@ async def send_one(session, url, model, req, t0):
                "max_tokens": req["max_tokens"], "temperature": 0,
                "stream": True, "stream_options": {"include_usage": True},
                "ignore_eos": True}
+    for field in ("priority", "vllm_xargs", "request_id"):
+        if field in req:
+            payload[field] = req[field]
     first_token_time = None
     output_tokens = 0
     usage_tokens = None
@@ -55,7 +58,8 @@ async def send_one(session, url, model, req, t0):
 async def run_workload(requests, url, model):
     t0 = time.perf_counter()
     timeout = aiohttp.ClientTimeout(total=3600)
-    connector = aiohttp.TCPConnector(limit=0)
+    # Recycle idle connections before vLLM's HTTP server closes them between bursts.
+    connector = aiohttp.TCPConnector(limit=0, keepalive_timeout=2)
     async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
         return await asyncio.gather(*(send_one(session, url, model, req, t0)
                                       for req in requests))

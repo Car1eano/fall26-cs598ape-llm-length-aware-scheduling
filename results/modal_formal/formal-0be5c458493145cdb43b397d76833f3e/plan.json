@@ -1,0 +1,430 @@
+{
+  "repo_commit": "245dfffdd4cd4b1328c9797ac6b8f0150fe891c9",
+  "plan_seed": 598,
+  "stages": [
+    [
+      {
+        "block": "short_heavy-5rps-r5",
+        "mix": "short_heavy",
+        "target_rate": 5,
+        "replicate": 5,
+        "trace_seed": 2015571292,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-5rps-r4",
+        "mix": "short_heavy",
+        "target_rate": 5,
+        "replicate": 4,
+        "trace_seed": 3449538724,
+        "policy_order": [
+          "aging_alpha05",
+          "native_fcfs",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-2rps-r5",
+        "mix": "balanced",
+        "target_rate": 2,
+        "replicate": 5,
+        "trace_seed": 2623179836,
+        "policy_order": [
+          "aging_alpha05",
+          "queue_only",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-2rps-r2",
+        "mix": "balanced",
+        "target_rate": 2,
+        "replicate": 2,
+        "trace_seed": 2468212511,
+        "policy_order": [
+          "native_fcfs",
+          "aging_alpha05",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-2rps-r3",
+        "mix": "balanced",
+        "target_rate": 2,
+        "replicate": 3,
+        "trace_seed": 4244763005,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-2rps-r3",
+        "mix": "short_heavy",
+        "target_rate": 2,
+        "replicate": 3,
+        "trace_seed": 3645283437,
+        "policy_order": [
+          "native_fcfs",
+          "aging_alpha05",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r4",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 4,
+        "trace_seed": 1885202216,
+        "policy_order": [
+          "aging_alpha05",
+          "native_fcfs",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r5",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 5,
+        "trace_seed": 2623179836,
+        "policy_order": [
+          "aging_alpha05",
+          "queue_only",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-5rps-r3",
+        "mix": "short_heavy",
+        "target_rate": 5,
+        "replicate": 3,
+        "trace_seed": 3645283437,
+        "policy_order": [
+          "aging_alpha05",
+          "native_fcfs",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-2rps-r1",
+        "mix": "short_heavy",
+        "target_rate": 2,
+        "replicate": 1,
+        "trace_seed": 3656830775,
+        "policy_order": [
+          "aging_alpha05",
+          "queue_only",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-5rps-r1",
+        "mix": "short_heavy",
+        "target_rate": 5,
+        "replicate": 1,
+        "trace_seed": 3656830775,
+        "policy_order": [
+          "queue_only",
+          "native_fcfs",
+          "aging_alpha05"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r1",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 1,
+        "trace_seed": 1000364615,
+        "policy_order": [
+          "aging_alpha05",
+          "queue_only",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-2rps-r4",
+        "mix": "balanced",
+        "target_rate": 2,
+        "replicate": 4,
+        "trace_seed": 1885202216,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r3",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 3,
+        "trace_seed": 4244763005,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-5rps-r2",
+        "mix": "balanced",
+        "target_rate": 5,
+        "replicate": 2,
+        "trace_seed": 2468212511,
+        "policy_order": [
+          "aging_alpha05",
+          "queue_only",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-2rps-r1",
+        "mix": "balanced",
+        "target_rate": 2,
+        "replicate": 1,
+        "trace_seed": 1000364615,
+        "policy_order": [
+          "aging_alpha05",
+          "native_fcfs",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-5rps-r2",
+        "mix": "short_heavy",
+        "target_rate": 5,
+        "replicate": 2,
+        "trace_seed": 1999092644,
+        "policy_order": [
+          "aging_alpha05",
+          "native_fcfs",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-2rps-r4",
+        "mix": "short_heavy",
+        "target_rate": 2,
+        "replicate": 4,
+        "trace_seed": 3449538724,
+        "policy_order": [
+          "queue_only",
+          "native_fcfs",
+          "aging_alpha05"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-2rps-r2",
+        "mix": "short_heavy",
+        "target_rate": 2,
+        "replicate": 2,
+        "trace_seed": 1999092644,
+        "policy_order": [
+          "native_fcfs",
+          "aging_alpha05",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-2rps-r5",
+        "mix": "short_heavy",
+        "target_rate": 2,
+        "replicate": 5,
+        "trace_seed": 2015571292,
+        "policy_order": [
+          "native_fcfs",
+          "queue_only",
+          "aging_alpha05"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      }
+    ],
+    [
+      {
+        "block": "balanced-30rps-r4",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 4,
+        "trace_seed": 1428558536,
+        "policy_order": [
+          "native_fcfs",
+          "aging_alpha05",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-30rps-r1",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 1,
+        "trace_seed": 2737803767,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-30rps-r5",
+        "mix": "short_heavy",
+        "target_rate": 30,
+        "replicate": 5,
+        "trace_seed": 1652508720,
+        "policy_order": [
+          "native_fcfs",
+          "aging_alpha05",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-30rps-r4",
+        "mix": "short_heavy",
+        "target_rate": 30,
+        "replicate": 4,
+        "trace_seed": 776373716,
+        "policy_order": [
+          "aging_alpha05",
+          "native_fcfs",
+          "queue_only"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-30rps-r2",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 2,
+        "trace_seed": 3777107450,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-30rps-r2",
+        "mix": "short_heavy",
+        "target_rate": 30,
+        "replicate": 2,
+        "trace_seed": 1844907223,
+        "policy_order": [
+          "native_fcfs",
+          "queue_only",
+          "aging_alpha05"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-30rps-r3",
+        "mix": "short_heavy",
+        "target_rate": 30,
+        "replicate": 3,
+        "trace_seed": 2305957954,
+        "policy_order": [
+          "queue_only",
+          "native_fcfs",
+          "aging_alpha05"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-30rps-r3",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 3,
+        "trace_seed": 2866718783,
+        "policy_order": [
+          "native_fcfs",
+          "queue_only",
+          "aging_alpha05"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "balanced-30rps-r5",
+        "mix": "balanced",
+        "target_rate": 30,
+        "replicate": 5,
+        "trace_seed": 3566243162,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      },
+      {
+        "block": "short_heavy-30rps-r1",
+        "mix": "short_heavy",
+        "target_rate": 30,
+        "replicate": 1,
+        "trace_seed": 2216554487,
+        "policy_order": [
+          "queue_only",
+          "aging_alpha05",
+          "native_fcfs"
+        ],
+        "workload_source": "gpu_experiments/results/fairness_900_rate30/workload.jsonl",
+        "warmup": "one short and one long, concurrent"
+      }
+    ]
+  ]
+}

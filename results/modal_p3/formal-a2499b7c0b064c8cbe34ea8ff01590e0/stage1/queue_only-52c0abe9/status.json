@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "policy": "queue_only",
+  "path": "formal-a2499b7c0b064c8cbe34ea8ff01590e0/stage1/queue_only-52c0abe9",
+  "started_at_unix": 1795109487.200587,
+  "error": "Traceback (most recent call last):\n  File \"/root/benchmark/gpu_experiments/modal_smoke.py\", line 232, in smoke\n    finish_traces()\n  File \"/root/benchmark/gpu_experiments/queue_traces.py\", line 57, in finish\n    raise RuntimeError(f\"Only {len(collected)}/{len(expected_ids)} queue traces captured\")\nRuntimeError: Only 899/900 queue traces captured\n",
+  "elapsed_s": 311.023117511,
+  "finished_at_unix": 1795109798.2237053
+}

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "native_priority",
+  "path": "formal-46ef3eb3a9a740f6837431d3246b1440/stage1/native_priority-5bf79dfe",
+  "started_at_unix": 1795096130.248652,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 304.803530873,
+  "finished_at_unix": 1795096435.0521836
+}
