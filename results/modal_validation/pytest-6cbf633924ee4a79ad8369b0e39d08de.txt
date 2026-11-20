@@ -1,0 +1,75 @@
+Executed at (UTC): 2026-11-19T23:39:38+00:00
+Installed vLLM: 0.26.0
+Command: python -m pytest tests/ -v
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.2, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /root/benchmark
+plugins: anyio-4.14.2
+collecting ... collected 56 items
+
+tests/test_aggregate.py::test_fmt_none_is_na PASSED                      [  1%]
+tests/test_aggregate.py::test_fmt_default_two_digits PASSED              [  3%]
+tests/test_aggregate.py::test_fmt_custom_digits PASSED                   [  5%]
+tests/test_aggregate.py::test_find_scenarios_groups_by_scenario PASSED   [  7%]
+tests/test_aggregate.py::test_find_scenarios_ignores_other_prefixes_and_dirs PASSED [  8%]
+tests/test_aggregate.py::test_find_scenarios_empty PASSED                [ 10%]
+tests/test_aggregate.py::test_load_runs_returns_all_runs_of_scenario PASSED [ 12%]
+tests/test_aggregate.py::test_load_runs_filters_scenario_and_prefix PASSED [ 14%]
+tests/test_aggregate.py::test_mean_of_nested_metric PASSED               [ 16%]
+tests/test_aggregate.py::test_mean_of_scalar_metric_with_key_none PASSED [ 17%]
+tests/test_aggregate.py::test_mean_of_skips_runs_missing_the_group PASSED [ 19%]
+tests/test_aggregate.py::test_mean_of_returns_none_when_group_never_present PASSED [ 21%]
+tests/test_aggregate.py::test_mean_of_skips_none_values PASSED           [ 23%]
+tests/test_aggregate.py::test_build_rows_single_group_scenario PASSED    [ 25%]
+tests/test_aggregate.py::test_build_rows_with_buckets PASSED             [ 26%]
+tests/test_aggregate.py::test_build_rows_multiple_scenarios_sorted PASSED [ 28%]
+tests/test_aggregate.py::test_build_rows_isolates_prefixes PASSED        [ 30%]
+tests/test_aggregate.py::test_build_rows_no_results PASSED               [ 32%]
+tests/test_aggregate.py::test_build_rows_row_length_matches_header PASSED [ 33%]
+tests/test_aggregate.py::test_render_produces_aligned_ascii_table PASSED [ 35%]
+tests/test_aggregate.py::test_render_header_only_when_no_rows PASSED     [ 37%]
+tests/test_aggregate.py::test_main_prints_table PASSED                   [ 39%]
+tests/test_aggregate.py::test_main_reports_when_nothing_found PASSED     [ 41%]
+tests/test_metrics.py::test_percentiles PASSED                           [ 42%]
+tests/test_metrics.py::test_throughput PASSED                            [ 44%]
+tests/test_metrics.py::test_failed_requests_excluded PASSED              [ 46%]
+tests/test_metrics.py::test_buckets PASSED                               [ 48%]
+tests/test_metrics.py::test_empty PASSED                                 [ 50%]
+tests/test_scheduler.py::test_queue_only_shortest_first PASSED           [ 51%]
+tests/test_scheduler.py::test_queue_only_tie_break_by_arrival PASSED     [ 53%]
+tests/test_scheduler.py::test_queue_only_empty_or_single[0] PASSED       [ 55%]
+tests/test_scheduler.py::test_queue_only_empty_or_single[1] PASSED       [ 57%]
+tests/test_scheduler.py::test_aging_alpha_is_half PASSED                 [ 58%]
+tests/test_scheduler.py::test_aging_priority_formula PASSED              [ 60%]
+tests/test_scheduler.py::test_aging_priority_decreases_with_wait PASSED  [ 62%]
+tests/test_scheduler.py::test_aging_can_prioritize_waiting_long_request PASSED [ 64%]
+tests/test_scheduler.py::test_aging_tie_break_by_arrival PASSED          [ 66%]
+tests/test_scheduler.py::test_aging_empty_or_single[0] PASSED            [ 67%]
+tests/test_scheduler.py::test_aging_empty_or_single[1] PASSED            [ 69%]
+tests/test_scheduler_variants.py::test_prompt_only_ignores_max_tokens PASSED [ 71%]
+tests/test_scheduler_variants.py::test_noise_can_reverse_similar_estimates PASSED [ 73%]
+tests/test_scheduler_variants.py::test_aging_alpha[AgingAlpha1-1] PASSED [ 75%]
+tests/test_scheduler_variants.py::test_aging_alpha[AgingAlpha2-2] PASSED [ 76%]
+tests/test_scheduler_variants.py::test_aging_alpha[AgingAlpha5-5] PASSED [ 78%]
+tests/test_scheduler_variants.py::test_aging_alpha[AgingAlpha10-10] PASSED [ 80%]
+tests/test_scheduler_variants.py::test_wait_promotion_has_threshold_and_fifo_tie_break PASSED [ 82%]
+tests/test_scheduler_variants.py::test_hrrn_uses_wait_relative_to_service_cost PASSED [ 83%]
+tests/test_scheduler_variants.py::test_five_second_limit_promotes_at_threshold PASSED [ 85%]
+tests/test_scheduler_variants.py::test_five_second_limit_crosses_waiting_queues PASSED [ 87%]
+tests/test_workload.py::test_count_and_schema PASSED                     [ 89%]
+tests/test_workload.py::test_arrivals_increase PASSED                    [ 91%]
+tests/test_workload.py::test_seed_reproducibility PASSED                 [ 92%]
+tests/test_workload.py::test_mixed_distribution PASSED                   [ 94%]
+tests/test_workload.py::test_rate PASSED                                 [ 96%]
+tests/test_workload.py::test_invalid_arguments PASSED                    [ 98%]
+tests/test_workload.py::test_jsonl_roundtrip PASSED                      [100%]
+
+=============================== warnings summary ===============================
+../../usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: 14 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 56 passed, 14 warnings in 19.91s =======================

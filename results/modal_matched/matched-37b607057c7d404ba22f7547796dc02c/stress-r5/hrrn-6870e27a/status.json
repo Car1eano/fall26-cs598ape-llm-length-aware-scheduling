@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "hrrn",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/stress-r5/hrrn-6870e27a",
+  "started_at_unix": 1795130615.6643414,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 107.37160611699983,
+  "finished_at_unix": 1795130723.0359488
+}

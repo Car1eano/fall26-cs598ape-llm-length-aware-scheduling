@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "aging_alpha05",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/rho-1.3-r1/aging_alpha05-d4f04a1a",
+  "started_at_unix": 1795131588.0243382,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 283.2318402160008,
+  "finished_at_unix": 1795131871.2561786
+}

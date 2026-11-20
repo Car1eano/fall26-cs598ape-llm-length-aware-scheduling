@@ -34,6 +34,8 @@ POLICIES = {
 }
 EXTRA_POLICIES = {
     "native_priority": None,
+    "aging_alpha01": "gpu_experiments.adaptive_length_aware_scheduler.AdaptiveLengthAwareScheduler",
+    "hybrid": "gpu_experiments.hybrid_conditional_aging_scheduler.HybridConditionalAgingScheduler",
     **{
         name: f"gpu_experiments.scheduler_variants.{cls}"
         for name, cls in {
@@ -44,6 +46,7 @@ EXTRA_POLICIES = {
             "aging_alpha5": "AgingAlpha5",
             "aging_alpha10": "AgingAlpha10",
             "wait_promotion": "WaitPromotionScheduler",
+            "wait_limit_5": "WaitLimit5Scheduler",
             "hrrn": "HRRNScheduler",
         }.items()
     },
@@ -79,15 +82,24 @@ def configure_requests(policy, requests, seed):
 
 app = modal.App("cs598ape-scheduler-smoke")
 volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
-image = (
+base_image = (
     modal.Image.from_registry(IMAGE_TAG)
     .entrypoint([])
     .run_commands("ln -sf /usr/bin/python3 /usr/local/bin/python", "python -m pip --version")
     .workdir(str(REMOTE_ROOT))
 )
-for package in ("benchmarks", "workload", "gpu_experiments"):
-    for source in sorted((ROOT / package).glob("*.py")):
-        image = image.add_local_file(source, str(REMOTE_ROOT / package / source.name))
+
+
+def with_repo_sources(container_image, packages=("benchmarks", "workload", "gpu_experiments")):
+    for package in packages:
+        for source in sorted((ROOT / package).glob("*.py")):
+            container_image = container_image.add_local_file(
+                source, str(REMOTE_ROOT / package / source.name)
+            )
+    return container_image
+
+
+image = with_repo_sources(base_image)
 
 
 def wait_for_server(server, health_url):
@@ -119,6 +131,10 @@ def stop_server(server):
 @app.function(image=image, gpu=GPU, cpu=2, memory=8192, timeout=1200,
               max_containers=MAX_WORKERS, volumes={str(OUTPUT): volume})
 def smoke(policy: str, requests: list, source: dict, batch_id: str) -> dict:
+    return run_gpu_benchmark(policy, requests, source, batch_id)
+
+
+def run_gpu_benchmark(policy, requests, source, batch_id):
     sys.path.insert(0, str(REMOTE_ROOT))
     from benchmarks.audit import audit_run
     from workload.generator import write_jsonl

@@ -1,0 +1,497 @@
+{
+  "workers": 10,
+  "cutoff": "2026-11-19 20:30",
+  "workload_source": "gpu_experiments/results/balanced_900_rate30_seed123/workload.jsonl",
+  "blocks": [
+    {
+      "block": "variants-1.1-r1",
+      "campaign": "variants",
+      "rho": 1.1,
+      "replicate": 1,
+      "trace_seed": 808187927,
+      "policy_order": [
+        "prompt_only",
+        "aging_alpha1",
+        "aging_alpha2",
+        "native_fcfs",
+        "queue_only",
+        "aging_alpha01",
+        "aging_alpha05",
+        "hybrid",
+        "aging_alpha10",
+        "noisy_length",
+        "aging_alpha5",
+        "wait_promotion",
+        "native_priority",
+        "hrrn"
+      ]
+    },
+    {
+      "block": "variants-1.1-r2",
+      "campaign": "variants",
+      "rho": 1.1,
+      "replicate": 2,
+      "trace_seed": 238717158,
+      "policy_order": [
+        "hybrid",
+        "aging_alpha1",
+        "hrrn",
+        "wait_promotion",
+        "aging_alpha10",
+        "aging_alpha05",
+        "aging_alpha5",
+        "native_priority",
+        "aging_alpha01",
+        "native_fcfs",
+        "aging_alpha2",
+        "noisy_length",
+        "queue_only",
+        "prompt_only"
+      ]
+    },
+    {
+      "block": "variants-1.1-r3",
+      "campaign": "variants",
+      "rho": 1.1,
+      "replicate": 3,
+      "trace_seed": 3659000365,
+      "policy_order": [
+        "prompt_only",
+        "queue_only",
+        "native_fcfs",
+        "aging_alpha5",
+        "hybrid",
+        "noisy_length",
+        "aging_alpha05",
+        "native_priority",
+        "aging_alpha1",
+        "aging_alpha01",
+        "wait_promotion",
+        "aging_alpha2",
+        "aging_alpha10",
+        "hrrn"
+      ]
+    },
+    {
+      "block": "variants-1.1-r4",
+      "campaign": "variants",
+      "rho": 1.1,
+      "replicate": 4,
+      "trace_seed": 3628424908,
+      "policy_order": [
+        "native_fcfs",
+        "aging_alpha1",
+        "aging_alpha5",
+        "aging_alpha10",
+        "aging_alpha2",
+        "native_priority",
+        "noisy_length",
+        "wait_promotion",
+        "queue_only",
+        "prompt_only",
+        "aging_alpha05",
+        "hrrn",
+        "aging_alpha01",
+        "hybrid"
+      ]
+    },
+    {
+      "block": "variants-1.1-r5",
+      "campaign": "variants",
+      "rho": 1.1,
+      "replicate": 5,
+      "trace_seed": 3785539896,
+      "policy_order": [
+        "aging_alpha10",
+        "aging_alpha01",
+        "aging_alpha2",
+        "noisy_length",
+        "hrrn",
+        "queue_only",
+        "native_priority",
+        "hybrid",
+        "aging_alpha05",
+        "prompt_only",
+        "wait_promotion",
+        "native_fcfs",
+        "aging_alpha5",
+        "aging_alpha1"
+      ]
+    },
+    {
+      "block": "rho-0.8-r1",
+      "campaign": "rho",
+      "rho": 0.8,
+      "replicate": 1,
+      "trace_seed": 1314030969,
+      "policy_order": [
+        "aging_alpha05",
+        "native_fcfs",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-0.8-r2",
+      "campaign": "rho",
+      "rho": 0.8,
+      "replicate": 2,
+      "trace_seed": 1258145570,
+      "policy_order": [
+        "aging_alpha05",
+        "native_fcfs",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-0.8-r3",
+      "campaign": "rho",
+      "rho": 0.8,
+      "replicate": 3,
+      "trace_seed": 805770837,
+      "policy_order": [
+        "queue_only",
+        "native_fcfs",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-0.8-r4",
+      "campaign": "rho",
+      "rho": 0.8,
+      "replicate": 4,
+      "trace_seed": 727122104,
+      "policy_order": [
+        "native_fcfs",
+        "queue_only",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-0.8-r5",
+      "campaign": "rho",
+      "rho": 0.8,
+      "replicate": 5,
+      "trace_seed": 3225836587,
+      "policy_order": [
+        "aging_alpha05",
+        "native_fcfs",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-0.9-r1",
+      "campaign": "rho",
+      "rho": 0.9,
+      "replicate": 1,
+      "trace_seed": 2841608199,
+      "policy_order": [
+        "queue_only",
+        "native_fcfs",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-0.9-r2",
+      "campaign": "rho",
+      "rho": 0.9,
+      "replicate": 2,
+      "trace_seed": 3334900669,
+      "policy_order": [
+        "aging_alpha05",
+        "queue_only",
+        "native_fcfs"
+      ]
+    },
+    {
+      "block": "rho-0.9-r3",
+      "campaign": "rho",
+      "rho": 0.9,
+      "replicate": 3,
+      "trace_seed": 3574507227,
+      "policy_order": [
+        "native_fcfs",
+        "aging_alpha05",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-0.9-r4",
+      "campaign": "rho",
+      "rho": 0.9,
+      "replicate": 4,
+      "trace_seed": 977345079,
+      "policy_order": [
+        "native_fcfs",
+        "aging_alpha05",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-0.9-r5",
+      "campaign": "rho",
+      "rho": 0.9,
+      "replicate": 5,
+      "trace_seed": 671902337,
+      "policy_order": [
+        "queue_only",
+        "aging_alpha05",
+        "native_fcfs"
+      ]
+    },
+    {
+      "block": "rho-1.0-r1",
+      "campaign": "rho",
+      "rho": 1.0,
+      "replicate": 1,
+      "trace_seed": 1665820291,
+      "policy_order": [
+        "native_fcfs",
+        "queue_only",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-1.0-r2",
+      "campaign": "rho",
+      "rho": 1.0,
+      "replicate": 2,
+      "trace_seed": 32910236,
+      "policy_order": [
+        "queue_only",
+        "native_fcfs",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-1.0-r3",
+      "campaign": "rho",
+      "rho": 1.0,
+      "replicate": 3,
+      "trace_seed": 1184240404,
+      "policy_order": [
+        "aging_alpha05",
+        "native_fcfs",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-1.0-r4",
+      "campaign": "rho",
+      "rho": 1.0,
+      "replicate": 4,
+      "trace_seed": 1093238858,
+      "policy_order": [
+        "queue_only",
+        "aging_alpha05",
+        "native_fcfs"
+      ]
+    },
+    {
+      "block": "rho-1.0-r5",
+      "campaign": "rho",
+      "rho": 1.0,
+      "replicate": 5,
+      "trace_seed": 432457446,
+      "policy_order": [
+        "native_fcfs",
+        "aging_alpha05",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "stress-r1",
+      "campaign": "stress",
+      "rho": null,
+      "replicate": 1,
+      "trace_seed": 2512291531,
+      "policy_order": [
+        "aging_alpha05",
+        "hrrn",
+        "wait_promotion",
+        "queue_only",
+        "wait_limit_5",
+        "native_fcfs"
+      ]
+    },
+    {
+      "block": "stress-r2",
+      "campaign": "stress",
+      "rho": null,
+      "replicate": 2,
+      "trace_seed": 601498487,
+      "policy_order": [
+        "wait_promotion",
+        "hrrn",
+        "native_fcfs",
+        "wait_limit_5",
+        "aging_alpha05",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "stress-r3",
+      "campaign": "stress",
+      "rho": null,
+      "replicate": 3,
+      "trace_seed": 4227090828,
+      "policy_order": [
+        "wait_promotion",
+        "hrrn",
+        "queue_only",
+        "aging_alpha05",
+        "wait_limit_5",
+        "native_fcfs"
+      ]
+    },
+    {
+      "block": "stress-r4",
+      "campaign": "stress",
+      "rho": null,
+      "replicate": 4,
+      "trace_seed": 655547733,
+      "policy_order": [
+        "aging_alpha05",
+        "hrrn",
+        "wait_promotion",
+        "native_fcfs",
+        "wait_limit_5",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "stress-r5",
+      "campaign": "stress",
+      "rho": null,
+      "replicate": 5,
+      "trace_seed": 39780364,
+      "policy_order": [
+        "native_fcfs",
+        "hrrn",
+        "wait_limit_5",
+        "aging_alpha05",
+        "queue_only",
+        "wait_promotion"
+      ]
+    },
+    {
+      "block": "rho-0.5-r1",
+      "campaign": "rho",
+      "rho": 0.5,
+      "replicate": 1,
+      "trace_seed": 2661717760,
+      "policy_order": [
+        "native_fcfs",
+        "queue_only",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-0.5-r2",
+      "campaign": "rho",
+      "rho": 0.5,
+      "replicate": 2,
+      "trace_seed": 1575809360,
+      "policy_order": [
+        "queue_only",
+        "native_fcfs",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-0.5-r3",
+      "campaign": "rho",
+      "rho": 0.5,
+      "replicate": 3,
+      "trace_seed": 1273667779,
+      "policy_order": [
+        "native_fcfs",
+        "aging_alpha05",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-0.5-r4",
+      "campaign": "rho",
+      "rho": 0.5,
+      "replicate": 4,
+      "trace_seed": 2149739146,
+      "policy_order": [
+        "aging_alpha05",
+        "native_fcfs",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-0.5-r5",
+      "campaign": "rho",
+      "rho": 0.5,
+      "replicate": 5,
+      "trace_seed": 2159691957,
+      "policy_order": [
+        "native_fcfs",
+        "aging_alpha05",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-1.3-r1",
+      "campaign": "rho",
+      "rho": 1.3,
+      "replicate": 1,
+      "trace_seed": 2306425580,
+      "policy_order": [
+        "native_fcfs",
+        "aging_alpha05",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-1.3-r2",
+      "campaign": "rho",
+      "rho": 1.3,
+      "replicate": 2,
+      "trace_seed": 3833737552,
+      "policy_order": [
+        "native_fcfs",
+        "queue_only",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-1.3-r3",
+      "campaign": "rho",
+      "rho": 1.3,
+      "replicate": 3,
+      "trace_seed": 513450183,
+      "policy_order": [
+        "native_fcfs",
+        "queue_only",
+        "aging_alpha05"
+      ]
+    },
+    {
+      "block": "rho-1.3-r4",
+      "campaign": "rho",
+      "rho": 1.3,
+      "replicate": 4,
+      "trace_seed": 3408672387,
+      "policy_order": [
+        "native_fcfs",
+        "aging_alpha05",
+        "queue_only"
+      ]
+    },
+    {
+      "block": "rho-1.3-r5",
+      "campaign": "rho",
+      "rho": 1.3,
+      "replicate": 5,
+      "trace_seed": 559316707,
+      "policy_order": [
+        "aging_alpha05",
+        "queue_only",
+        "native_fcfs"
+      ]
+    }
+  ]
+}

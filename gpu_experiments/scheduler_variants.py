@@ -1,5 +1,7 @@
 """Experimental waiting-queue policies for the P1 sensitivity study."""
 
+import time
+
 from gpu_experiments.adaptive_length_aware_scheduler import AdaptiveLengthAwareScheduler
 from gpu_experiments.length_aware_queue_only_scheduler import LengthAwareQueueOnlyScheduler
 
@@ -44,6 +46,22 @@ class WaitPromotionScheduler(AdaptiveLengthAwareScheduler):
         if now - request.arrival_time >= self.WAIT_THRESHOLD_S:
             return 0, request.arrival_time, 0
         return 1, request.num_prompt_tokens + request.max_tokens, request.arrival_time
+
+
+class WaitLimit5Scheduler(WaitPromotionScheduler):
+    """Promote overdue heads across queues at the next eligible admission."""
+
+    WAIT_THRESHOLD_S = 5.0
+
+    def _select_waiting_queue_for_scheduling(self):
+        now = time.time()
+        overdue = [
+            queue for queue in (self.waiting, self.skipped_waiting)
+            if queue and now - queue.peek_request().arrival_time >= self.WAIT_THRESHOLD_S
+        ]
+        if overdue:
+            return min(overdue, key=lambda queue: queue.peek_request().arrival_time)
+        return super()._select_waiting_queue_for_scheduling()
 
 
 class HRRNScheduler(AdaptiveLengthAwareScheduler):

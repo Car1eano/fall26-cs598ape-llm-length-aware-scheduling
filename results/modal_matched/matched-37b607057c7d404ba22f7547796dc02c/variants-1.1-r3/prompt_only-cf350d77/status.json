@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "prompt_only",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/variants-1.1-r3/prompt_only-cf350d77",
+  "started_at_unix": 1795127280.0880995,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 290.21287473900003,
+  "finished_at_unix": 1795127570.3009748
+}

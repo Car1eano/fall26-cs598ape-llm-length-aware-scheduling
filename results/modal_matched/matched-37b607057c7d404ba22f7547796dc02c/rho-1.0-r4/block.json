@@ -1,0 +1,81 @@
+{
+  "block": "rho-1.0-r4",
+  "campaign": "rho",
+  "rho": 1.0,
+  "replicate": 4,
+  "trace_seed": 1093238858,
+  "policy_order": [
+    "queue_only",
+    "aging_alpha05",
+    "native_fcfs"
+  ],
+  "hostname": "modal",
+  "gpu_identity": "NVIDIA L40S, 620.70.06, 46068, GPU-8c09b922-6ad0-ef3a-790d-17f640a941e8",
+  "modal_task_id": "ta-01M7TYJT7QWS9CY06FTTF3ZEHR",
+  "max_num_seqs": 4,
+  "trace_queue": true,
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/rho-1.0-r4",
+  "runs": [
+    {
+      "ok": true,
+      "policy": "queue_only",
+      "path": "matched-37b607057c7d404ba22f7547796dc02c/rho-1.0-r4/queue_only-6c44c4a1",
+      "started_at_unix": 1795129548.9077642,
+      "rows": 900,
+      "failed": 0,
+      "token_mismatches": 0,
+      "bad_timestamps": 0,
+      "bad_ids": 0,
+      "summary_ok": true,
+      "elapsed_s": 290.62567571399995,
+      "finished_at_unix": 1795129839.533441
+    },
+    {
+      "ok": true,
+      "policy": "aging_alpha05",
+      "path": "matched-37b607057c7d404ba22f7547796dc02c/rho-1.0-r4/aging_alpha05-d37841e8",
+      "started_at_unix": 1795129841.6245177,
+      "rows": 900,
+      "failed": 0,
+      "token_mismatches": 0,
+      "bad_timestamps": 0,
+      "bad_ids": 0,
+      "summary_ok": true,
+      "elapsed_s": 288.858868108,
+      "finished_at_unix": 1795130130.4833863
+    },
+    {
+      "ok": true,
+      "policy": "native_fcfs",
+      "path": "matched-37b607057c7d404ba22f7547796dc02c/rho-1.0-r4/native_fcfs-83e59d6f",
+      "started_at_unix": 1795130132.624977,
+      "rows": 900,
+      "failed": 0,
+      "token_mismatches": 0,
+      "bad_timestamps": 0,
+      "bad_ids": 0,
+      "summary_ok": true,
+      "elapsed_s": 289.08474354400005,
+      "finished_at_unix": 1795130421.7097213
+    }
+  ],
+  "ok": true,
+  "started_at_unix": 1795129418.1831014,
+  "calibration": {
+    "ok": true,
+    "policy": "native_fcfs",
+    "path": "matched-37b607057c7d404ba22f7547796dc02c/rho-1.0-r4/calibration/native_fcfs-b85f37d6",
+    "started_at_unix": 1795129418.220924,
+    "rows": 320,
+    "failed": 0,
+    "token_mismatches": 0,
+    "bad_timestamps": 0,
+    "bad_ids": 0,
+    "summary_ok": true,
+    "elapsed_s": 129.86348830499992,
+    "finished_at_unix": 1795129548.0844126
+  },
+  "target_rate": 3.7052208917140947,
+  "capacity_tok_s": 264.4704334263483,
+  "elapsed_s": 1005.2793307304382
+}

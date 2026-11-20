@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "native_fcfs",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/variants-1.1-r1/calibration/native_fcfs-09eb3576",
+  "started_at_unix": 1795127085.7873242,
+  "rows": 320,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 182.17713953499998,
+  "finished_at_unix": 1795127267.9644642
+}

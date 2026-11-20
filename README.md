@@ -6,6 +6,106 @@
 - Carleano Chang (`poching2`)
 - Christine Liou (`ycliou2`)
 
+
+The [final report PDF](output/pdf/final_report.pdf) and its [LaTeX source](report/final_report.tex) describe the capacity-calibrated Modal study.
+
+## Current Modal experiments
+
+The current environment-controlled comparison uses one NVIDIA L40S per
+Modal container, vLLM 0.26.0, Qwen2.5-0.5B-Instruct, and four concurrent
+sequences. Each block starts with a native FCFS capacity calibration on
+a fixed 320-request saturated trace. The block restarts vLLM for each
+policy, randomizes policy order, and keeps GPU UUID, driver, visible
+memory, hostname, and workload together. For the balanced trace, the
+target rate is `rho * capacity_tok_s / mean_requested_output_tokens`.
+Each workload level uses five seeded blocks. Modal may reuse an idle
+container across blocks. Policy effects are computed within blocks and
+the environment labels remain available for cross-block comparisons.
+The completed campaign contains 35 audited blocks, 175 policy runs,
+and 35 capacity calibrations.
+
+The core comparison uses FCFS, Queue-Only, and Aging alpha=0.5. The
+variant comparison at rho=1.1 adds Aging alpha=0.1, 1, 2, 5, and 10,
+native priority, prompt-only length, noisy length, wait promotion,
+HRRN, and Hybrid. The stress comparison adds a five-second
+waiting-priority rule to FCFS, Queue-Only, Aging, ten-second promotion,
+and HRRN.
+
+The five-second rule moves overdue requests ahead of younger requests
+at the next eligible admission. Native vLLM 0.26.0 schedules running
+requests before admission and applies a shared running-sequence limit,
+token budget, and KV allocation checks. A dedicated oldest-request
+slot would require changing that admission machinery, including slot
+accounting for skipped or resumed requests. This experiment retains
+native admission and uses priority promotion.
+
+### Hardware and software requirements
+
+| Task | Requirements |
+|---|---|
+| Matched GPU experiments | An authenticated Modal CLI, available compute credits, and one NVIDIA L40S per concurrent block (at least 46,068 MiB visible in the recorded runs). The `vllm/vllm-openai:v0.26.0` image supplies Python 3.12, vLLM 0.26.0, and PyTorch 2.11.0+cu130 as recorded for the matched runs. |
+| Offline analysis and figures | Python 3.12, NumPy, Matplotlib, and the saved results. Runs on CPU without a Modal account. Tectonic is used separately to compile the report PDF. |
+| Workload, metrics, and aggregation tests | Python 3.12, pytest, and NumPy on CPU. |
+| Full test suite, including scheduler tests | The pinned vLLM 0.26.0 image and pytest 9.0.2. Verified in a Modal CPU container using both scheduler test files. |
+
+From the repository root, set up the local analysis environment with:
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/pip install modal numpy matplotlib pytest
+```
+
+To reproduce the experiment and run the full suite, authenticate the
+Modal CLI and replace the cutoff placeholder with a future date and
+time in America/Chicago. One worker needs one L40S at a time. The
+recorded campaign used ten concurrent workers.
+
+```bash
+.venv/bin/modal run -m gpu_experiments.modal_matched \
+  --workers 1 --cutoff "YYYY-MM-DD HH:MM"
+.venv/bin/modal run -m gpu_experiments.modal_tests
+```
+
+The GPU runner records the plan and replays the repository's balanced
+900-request workload template alongside seeded stress workloads. To
+rebuild the tables and figures from existing results on CPU:
+
+```bash
+.venv/bin/python -m report_analysis.matched_results \
+  results/modal_matched/matched-* --out results/modal_matched_analysis
+.venv/bin/python -m report_analysis.matched_evidence results/modal_matched_analysis
+.venv/bin/python -m report_analysis.plot_matched \
+  --matched results/modal_matched_analysis/individual_runs.csv \
+  --out report/figures/matched
+```
+
+Use `--cutoff "YYYY-MM-DD HH:MM"` to set a GPU deadline in America/Chicago
+and `--only-blocks` to replay named incomplete blocks. Usage estimates are
+printed before each group is submitted. Each block and attempt retains
+its own output path. The full suite has **56 passing tests** in the
+vLLM 0.26.0 Modal image, including the real scheduler imports and the
+five-second promotion tests. The per-file counts are recorded in
+[`results/test_report.txt`](results/test_report.txt).
+
+The analysis directory contains the run audit, per-block FCFS differences,
+the matched policy summaries in the report’s Table 5, each stress probe's TTFT, and a claim-to-run index. The
+queue-depth panel uses vLLM's periodic waiting-count logs at rho=1.1.
+`queue_depth_samples.csv` preserves those samples for replotting. If the
+logs contain no complete comparison, the queue-depth panel is omitted.
+
+### Historical results and the environment issue
+
+The original RTX 5090 experiment and the first Modal sweep are preserved
+as exploratory results. In the first Modal sweep, the same balanced FCFS
+configuration at 5 requests/s produced short P95 TTFT of 1.19 s in its
+one driver-610 run and a mean of 58.19 s across four driver-620 runs.
+Prompt-only and Aging alpha=1 and 5 each ran only in the faster
+environment in this comparison. Their low pooled long-P95 values describe
+that assignment. Reproducing a historical fixed-rate result near 5
+requests/s is sensitive to the host's capacity. The current experiment
+calibrates capacity per block and compares policies within the same
+container.
+
 ## 1. Project Overview
 
 Large Language Model (LLM) inference requests have different prompt and output lengths. Under heavy load, request scheduling affects responsiveness, latency, and throughput.
@@ -18,7 +118,7 @@ The project includes scheduler implementations, synthetic workload generation, u
 
 ## 2. Scheduling Policies
 
-Five policies are evaluated in the main GPU experiments.
+Five policies were evaluated in the early RTX 5090 exploration.
 
 | Policy | Description |
 |---|---|
@@ -40,7 +140,9 @@ These heuristics aim to improve responsiveness and mitigate long-request delays,
 
 | Path | Description |
 |---|---|
-| `gpu_experiments/` | GPU scheduler implementations and smoke-test scripts |
+| `gpu_experiments/` | Scheduler implementations, Modal runners, smoke tests, and profiling |
+| `report_analysis/matched_*.py` | Current block audit, paired analysis, and claim-to-run index |
+| `report_analysis/plot_matched.py` | Figures for the current Modal study |
 | `report_analysis/analyze.py` | Main benchmark aggregation and audit |
 | `report_analysis/plot_results.py` | Performance figure generation |
 | `report_analysis/sensitivity_analysis.py` | Analysis of an anomalous Queue-Only run |
@@ -50,7 +152,11 @@ These heuristics aim to improve responsiveness and mitigate long-request delays,
 | `workload/` | Synthetic workload generation |
 | `benchmarks/` | Streaming benchmark client and metric collection |
 | `scripts/` | Preliminary CPU baseline scripts |
-| `results/` | Historical CPU experiment results |
+| `results/modal_matched/` | Current Modal plans, calibration traces, and per-run artifacts |
+| `results/modal_matched_analysis/` | Audited CSVs, paired results, and billing records |
+| `results/test_report.txt` | Full unit-test verification and per-file counts |
+| `results/` | Current and historical experiment results |
+| `report/` | LaTeX source, result notes, and report figures |
 | `artifacts/` | Archived experiment artifacts |
 
 ## 4. Experimental Environments
@@ -72,9 +178,9 @@ The initial baseline experiments used the following environment:
 
 These experiments validated the workload generator, benchmark client, metrics collection, and FCFS baseline.
 
-### 4.2 Main GPU Experiments
+### 4.2 Early RTX 5090 Exploration
 
-The main scheduling comparisons were conducted on a shared GPU server.
+The early scheduling comparisons were conducted on a shared GPU server.
 
 | Component | Configuration |
 |---|---|
@@ -119,14 +225,14 @@ Synthetic workloads use Poisson request arrivals and two request classes.
 | Short | 32 tokens | 16 tokens |
 | Long | 256 tokens | 128 tokens |
 
-The main GPU experiments evaluate two request distributions.
+The early RTX 5090 experiments evaluate two request distributions.
 
 | Scenario | Short requests | Long requests | Total |
 |---|---:|---:|---:|
 | `fairness_900_rate30` | 813 | 87 | 900 |
 | `balanced_900_rate30_seed123` | 455 | 445 | 900 |
 
-Both scenarios use a target arrival rate of 30 requests per second.
+The early RTX 5090 runs used a target arrival rate of 30 requests per second.
 
 ## 6. Evaluation Metrics
 
@@ -144,7 +250,7 @@ Aggregate results are arithmetic means of per-run measurements. The analysis als
 
 Percentiles are computed within each run and then averaged across runs, rather than calculated from pooled requests.
 
-## 7. Main GPU Results
+## 7. Early RTX 5090 Results
 
 ### 7.1 Fairness Workload: Approximately 90% Short Requests
 
@@ -190,7 +296,7 @@ The figures compare all five policies across both workload scenarios and include
 
 ## 8. Testing
 
-The project has **46 passing unit tests**.
+The project has **56 passing unit tests in the Modal vLLM image**.
 
 The test suite covers:
 
@@ -352,12 +458,12 @@ The project has several limitations:
 
 1. The experiments use a relatively small LLM.
 2. Synthetic workloads may not represent production request distributions.
-3. The main GPU comparisons cover only two workload distributions and a limited number of repeated runs.
+3. The early RTX 5090 comparisons use two workload distributions and limited repetitions.
 4. Experiments were performed on shared GPU infrastructure, where external activity may affect measurements.
 5. Prioritizing shorter requests can substantially increase long-request latency.
 6. Aging-based priority heuristics do not formally guarantee starvation freedom.
 7. The preserved JSON summaries support statistical reproducibility but do not include every original per-request trace or runtime log.
-8. The complete main GPU benchmark launch procedure has not yet been packaged into a verified one-command reproduction script.
+8. The exact launch settings for the early RTX 5090 runs were not preserved.
 
 Results should not be generalized to arbitrary models, hardware configurations, or production workloads.
 
@@ -365,7 +471,7 @@ Results should not be generalized to arbitrary models, hardware configurations, 
 
 Length-aware scheduling can substantially improve short-request responsiveness in LLM serving.
 
-Across the two main 900-request workloads, Queue-Only scheduling reduced short-request P95 TTFT by approximately 94.2% and 99.2% compared with Native FCFS.
+Across the two early RTX 5090 workloads of 900 requests each, Queue-Only scheduling reduced short-request P95 TTFT by approximately 94.2% and 99.2% compared with Native FCFS.
 
 However, these gains must be evaluated alongside long-request latency and throughput.
 

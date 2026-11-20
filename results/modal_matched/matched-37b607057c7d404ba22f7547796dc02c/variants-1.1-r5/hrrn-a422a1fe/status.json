@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "hrrn",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/variants-1.1-r5/hrrn-a422a1fe",
+  "started_at_unix": 1795128039.871661,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 183.6752430780001,
+  "finished_at_unix": 1795128223.5469048
+}

@@ -6,7 +6,8 @@ import pytest
 
 from gpu_experiments.scheduler_variants import (
     AgingAlpha1, AgingAlpha2, AgingAlpha5, AgingAlpha10,
-    HRRNScheduler, NoisyLengthScheduler, PromptOnlyScheduler, WaitPromotionScheduler,
+    HRRNScheduler, NoisyLengthScheduler, PromptOnlyScheduler, WaitLimit5Scheduler,
+    WaitPromotionScheduler,
 )
 
 
@@ -54,3 +55,27 @@ def test_hrrn_uses_wait_relative_to_service_cost():
     short = request(32, 16, 17)
     assert scheduler._priority_key(short, 20) < scheduler._priority_key(long, 20)
     assert scheduler._priority_key(long, 18) < scheduler._priority_key(short, 18)
+
+
+def test_five_second_limit_promotes_at_threshold():
+    scheduler = WaitLimit5Scheduler.__new__(WaitLimit5Scheduler)
+    old = request(256, 128, 10)
+    recent = request(32, 16, 14)
+    assert scheduler._priority_key(recent, 14.99) < scheduler._priority_key(old, 14.99)
+    assert scheduler._priority_key(old, 15) < scheduler._priority_key(recent, 15)
+
+
+def test_five_second_limit_crosses_waiting_queues(monkeypatch):
+    from gpu_experiments import scheduler_variants
+
+    class WaitingQueue(list):
+        def peek_request(self):
+            return self[0]
+
+    scheduler = WaitLimit5Scheduler.__new__(WaitLimit5Scheduler)
+    monkeypatch.setattr(scheduler_variants.time, "time", lambda: 20)
+    scheduler.waiting = WaitingQueue([request(256, 128, 10)])
+    scheduler.skipped_waiting = WaitingQueue([request(32, 16, 14)])
+    assert scheduler._select_waiting_queue_for_scheduling() is scheduler.waiting
+    scheduler.skipped_waiting[0] = request(32, 16, 9)
+    assert scheduler._select_waiting_queue_for_scheduling() is scheduler.skipped_waiting

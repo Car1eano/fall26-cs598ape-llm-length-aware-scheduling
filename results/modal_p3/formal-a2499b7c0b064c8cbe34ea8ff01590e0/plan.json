@@ -3,7 +3,7 @@
   "plan_seed": 598,
   "max_num_seqs": 4,
   "trace_queue": true,
-  "paired_plan": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/plan.json",
+  "paired_plan": "results/modal_p3/inputs/plan.json",
   "stages": [
     [
       {
@@ -11,7 +11,7 @@
         "mix": "short_70pct",
         "replicate": 5,
         "trace_seed": 2130650107,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_70pct-r5.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_70pct-r5.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -25,7 +25,7 @@
         "mix": "short_70pct",
         "replicate": 3,
         "trace_seed": 3174636205,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_70pct-r3.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_70pct-r3.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -39,7 +39,7 @@
         "mix": "short_30pct",
         "replicate": 4,
         "trace_seed": 2574985479,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_30pct-r4.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_30pct-r4.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -53,7 +53,7 @@
         "mix": "bursty_balanced",
         "replicate": 3,
         "trace_seed": 3174636205,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/bursty_balanced-r3.jsonl",
+        "trace_file": "results/modal_p3/inputs/bursty_balanced-r3.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -67,7 +67,7 @@
         "mix": "lognormal_lengths",
         "replicate": 4,
         "trace_seed": 2574985479,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/lognormal_lengths-r4.jsonl",
+        "trace_file": "results/modal_p3/inputs/lognormal_lengths-r4.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -81,7 +81,7 @@
         "mix": "bursty_balanced",
         "replicate": 4,
         "trace_seed": 2574985479,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/bursty_balanced-r4.jsonl",
+        "trace_file": "results/modal_p3/inputs/bursty_balanced-r4.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -95,7 +95,7 @@
         "mix": "short_10pct",
         "replicate": 4,
         "trace_seed": 2574985479,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_10pct-r4.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_10pct-r4.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -109,7 +109,7 @@
         "mix": "short_10pct",
         "replicate": 3,
         "trace_seed": 3174636205,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_10pct-r3.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_10pct-r3.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -123,7 +123,7 @@
         "mix": "short_30pct",
         "replicate": 2,
         "trace_seed": 1383679822,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_30pct-r2.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_30pct-r2.jsonl",
         "target_rate": 5,
         "policy_order": [
           "native_fcfs",
@@ -137,7 +137,7 @@
         "mix": "lognormal_lengths",
         "replicate": 2,
         "trace_seed": 1383679822,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/lognormal_lengths-r2.jsonl",
+        "trace_file": "results/modal_p3/inputs/lognormal_lengths-r2.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -151,7 +151,7 @@
         "mix": "short_10pct",
         "replicate": 5,
         "trace_seed": 2130650107,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_10pct-r5.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_10pct-r5.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -165,7 +165,7 @@
         "mix": "short_10pct",
         "replicate": 2,
         "trace_seed": 1383679822,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_10pct-r2.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_10pct-r2.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -179,7 +179,7 @@
         "mix": "short_30pct",
         "replicate": 5,
         "trace_seed": 2130650107,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_30pct-r5.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_30pct-r5.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -193,7 +193,7 @@
         "mix": "bursty_balanced",
         "replicate": 2,
         "trace_seed": 1383679822,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/bursty_balanced-r2.jsonl",
+        "trace_file": "results/modal_p3/inputs/bursty_balanced-r2.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -207,7 +207,7 @@
         "mix": "short_30pct",
         "replicate": 3,
         "trace_seed": 3174636205,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_30pct-r3.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_30pct-r3.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -221,7 +221,7 @@
         "mix": "short_10pct",
         "replicate": 1,
         "trace_seed": 4256137914,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_10pct-r1.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_10pct-r1.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -235,7 +235,7 @@
         "mix": "short_30pct",
         "replicate": 1,
         "trace_seed": 4256137914,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_30pct-r1.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_30pct-r1.jsonl",
         "target_rate": 5,
         "policy_order": [
           "native_fcfs",
@@ -249,7 +249,7 @@
         "mix": "bursty_balanced",
         "replicate": 5,
         "trace_seed": 2130650107,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/bursty_balanced-r5.jsonl",
+        "trace_file": "results/modal_p3/inputs/bursty_balanced-r5.jsonl",
         "target_rate": 5,
         "policy_order": [
           "native_fcfs",
@@ -263,7 +263,7 @@
         "mix": "bursty_balanced",
         "replicate": 1,
         "trace_seed": 4256137914,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/bursty_balanced-r1.jsonl",
+        "trace_file": "results/modal_p3/inputs/bursty_balanced-r1.jsonl",
         "target_rate": 5,
         "policy_order": [
           "native_fcfs",
@@ -277,7 +277,7 @@
         "mix": "short_70pct",
         "replicate": 1,
         "trace_seed": 4256137914,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_70pct-r1.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_70pct-r1.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -291,7 +291,7 @@
         "mix": "short_70pct",
         "replicate": 4,
         "trace_seed": 2574985479,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_70pct-r4.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_70pct-r4.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",
@@ -305,7 +305,7 @@
         "mix": "lognormal_lengths",
         "replicate": 1,
         "trace_seed": 4256137914,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/lognormal_lengths-r1.jsonl",
+        "trace_file": "results/modal_p3/inputs/lognormal_lengths-r1.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -319,7 +319,7 @@
         "mix": "lognormal_lengths",
         "replicate": 5,
         "trace_seed": 2130650107,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/lognormal_lengths-r5.jsonl",
+        "trace_file": "results/modal_p3/inputs/lognormal_lengths-r5.jsonl",
         "target_rate": 5,
         "policy_order": [
           "aging_alpha05",
@@ -333,7 +333,7 @@
         "mix": "short_70pct",
         "replicate": 2,
         "trace_seed": 1383679822,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/short_70pct-r2.jsonl",
+        "trace_file": "results/modal_p3/inputs/short_70pct-r2.jsonl",
         "target_rate": 5,
         "policy_order": [
           "native_fcfs",
@@ -347,7 +347,7 @@
         "mix": "lognormal_lengths",
         "replicate": 3,
         "trace_seed": 3174636205,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/lognormal_lengths-r3.jsonl",
+        "trace_file": "results/modal_p3/inputs/lognormal_lengths-r3.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only",

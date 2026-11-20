@@ -230,6 +230,9 @@ __marimo__/
 server.log
 bench.log
 
+# Preserve matched-study server logs used to rebuild queue-depth samples.
+!results/modal_matched/**/server.log
+
 # Large per-request raw results; keep summary.json and *_summary.txt
 results/*/raw_results.jsonl
 

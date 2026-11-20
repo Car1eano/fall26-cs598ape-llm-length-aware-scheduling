@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "wait_limit_5",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/stress-r2/wait_limit_5-9b112328",
+  "started_at_unix": 1795130190.953696,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 78.34687344399981,
+  "finished_at_unix": 1795130269.3005707
+}

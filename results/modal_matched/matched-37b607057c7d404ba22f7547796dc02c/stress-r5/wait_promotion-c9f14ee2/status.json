@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "wait_promotion",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/stress-r5/wait_promotion-c9f14ee2",
+  "started_at_unix": 1795131064.348938,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 106.70139571299978,
+  "finished_at_unix": 1795131171.0503347
+}

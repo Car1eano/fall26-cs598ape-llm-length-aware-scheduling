@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "hybrid",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/variants-1.1-r2/hybrid-b49854e2",
+  "started_at_unix": 1795127288.5402508,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 317.630091407,
+  "finished_at_unix": 1795127606.1703434
+}

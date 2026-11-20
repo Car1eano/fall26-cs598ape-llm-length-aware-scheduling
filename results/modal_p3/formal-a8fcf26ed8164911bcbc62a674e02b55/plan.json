@@ -3,7 +3,7 @@
   "plan_seed": 598,
   "max_num_seqs": 4,
   "trace_queue": true,
-  "paired_plan": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/formal-a2499b7c0b064c8cbe34ea8ff01590e0/remaining-plan.json",
+  "paired_plan": "results/modal_p3/formal-a2499b7c0b064c8cbe34ea8ff01590e0/remaining-plan.json",
   "stages": [
     [
       {
@@ -11,7 +11,7 @@
         "mix": "bursty_balanced",
         "replicate": 3,
         "trace_seed": 3174636205,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p3/inputs/bursty_balanced-r3.jsonl",
+        "trace_file": "results/modal_p3/inputs/bursty_balanced-r3.jsonl",
         "target_rate": 5,
         "policy_order": [
           "queue_only"

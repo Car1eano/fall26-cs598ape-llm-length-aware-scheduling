@@ -1,0 +1,25 @@
+CS598APE full test suite
+
+Executed: 2026-11-19 17:39:38 CST (2026-11-19 23:39:38 UTC)
+Environment: Modal CPU container, image vllm/vllm-openai:v0.26.0
+Installed versions: vLLM 0.26.0, pytest 9.0.2
+Command: python -m pytest tests/ -v
+Modal app: ap-OSFFrLoCQFwvCW9O5UC3Fr
+Full pytest output: results/modal_validation/pytest-6cbf633924ee4a79ad8369b0e39d08de.txt
+
+Test file                       Total Passed Failed Skipped
+test_aggregate.py                  23     23      0       0
+test_metrics.py                     5      5      0       0
+test_scheduler.py                  11     11      0       0
+test_scheduler_variants.py         10     10      0       0
+test_workload.py                    7      7      0       0
+TOTAL                              56     56      0       0
+
+Pytest summary: 56 passed, 14 warnings in 19.91s
+Warnings: 14 PyTorch torch.jit.script_method deprecation warnings.
+Errors: none. The rerun used the same tests without exclusions.
+
+The old README and report quoted 46 passing tests. Those 46 cases match
+the combined count for aggregate (23), metrics (5), scheduler (11), and
+workload (7). The full suite adds 8 pre-existing variant cases and 2 new
+five-second promotion cases, for 56. Both scheduler test files ran.

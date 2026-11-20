@@ -7,7 +7,7 @@
         "mix": "sustained_short_arrivals",
         "replicate": 5,
         "trace_seed": 433869958,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p4/inputs/sustained_short_arrivals-r5.jsonl",
+        "trace_file": "results/modal_p4/inputs/sustained_short_arrivals-r5.jsonl",
         "target_rate": 30,
         "policy_order": [
           "native_fcfs",
@@ -21,7 +21,7 @@
         "mix": "sustained_short_arrivals",
         "replicate": 2,
         "trace_seed": 2948470108,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p4/inputs/sustained_short_arrivals-r2.jsonl",
+        "trace_file": "results/modal_p4/inputs/sustained_short_arrivals-r2.jsonl",
         "target_rate": 30,
         "policy_order": [
           "aging_alpha05",
@@ -35,7 +35,7 @@
         "mix": "sustained_short_arrivals",
         "replicate": 1,
         "trace_seed": 3495478952,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p4/inputs/sustained_short_arrivals-r1.jsonl",
+        "trace_file": "results/modal_p4/inputs/sustained_short_arrivals-r1.jsonl",
         "target_rate": 30,
         "policy_order": [
           "aging_alpha05",
@@ -49,7 +49,7 @@
         "mix": "sustained_short_arrivals",
         "replicate": 3,
         "trace_seed": 4063487737,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p4/inputs/sustained_short_arrivals-r3.jsonl",
+        "trace_file": "results/modal_p4/inputs/sustained_short_arrivals-r3.jsonl",
         "target_rate": 30,
         "policy_order": [
           "aging_alpha05",
@@ -63,7 +63,7 @@
         "mix": "sustained_short_arrivals",
         "replicate": 4,
         "trace_seed": 3139745526,
-        "trace_file": "/Users/carleanochang/git/CS598/fall26-cs598ape-llm-length-aware-scheduling/results/modal_p4/inputs/sustained_short_arrivals-r4.jsonl",
+        "trace_file": "results/modal_p4/inputs/sustained_short_arrivals-r4.jsonl",
         "target_rate": 30,
         "policy_order": [
           "queue_only",

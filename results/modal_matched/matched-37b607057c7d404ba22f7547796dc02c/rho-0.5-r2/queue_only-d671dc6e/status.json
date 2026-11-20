@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "queue_only",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/rho-0.5-r2/queue_only-d671dc6e",
+  "started_at_unix": 1795130517.324226,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 323.23893100600026,
+  "finished_at_unix": 1795130840.5631578
+}

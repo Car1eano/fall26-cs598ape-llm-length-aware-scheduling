@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "policy": "queue_only",
+  "path": "matched-37b607057c7d404ba22f7547796dc02c/stress-r2/queue_only-c6d3b539",
+  "started_at_unix": 1795130349.9954772,
+  "rows": 900,
+  "failed": 0,
+  "token_mismatches": 0,
+  "bad_timestamps": 0,
+  "bad_ids": 0,
+  "summary_ok": true,
+  "elapsed_s": 74.90405257400016,
+  "finished_at_unix": 1795130424.8995311
+}
