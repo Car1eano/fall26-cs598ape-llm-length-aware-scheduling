@@ -105,8 +105,8 @@ execution of running requests. This isolates the effect of queue ordering.
 
 \subsection{Design principle}
 vLLM admits waiting requests into each engine step in queue order, up to
-a cap on concurrent sequences (\texttt{max-num-seqs}) and the available
-KV-cache memory and the available token budget. Ordering matters
+a cap on concurrent sequences (\texttt{max-num-seqs}), the available
+KV-cache memory and the token budget. Ordering matters
 when requests compete for an admission opportunity. Our policies
 change waiting-queue order and leave admission checks, batch formation,
 memory management and execution to vLLM.
@@ -136,8 +136,8 @@ The 10\,s version orders within each queue. The 5\,s version
 can also select the oldest overdue head across both queues at
 the next eligible admission.
 \end{itemize}
-Appendix~\ref{app:example} works through the policies on requests taken
-from a real run.
+Appendix~\ref{app:example} follows selected requests from a real run
+through three of these policies.
 
 \subsection{Algorithm and cost}
 The custom policies extend \texttt{AsyncScheduler}. Their sorting
@@ -379,8 +379,8 @@ Five-second promotion reduces mean long P95 by 2.18\,s relative to
 observed long-probe queue time is 14.72\,s. The threshold changes
 selection order while admission still depends on available slots.
 Figure~\ref{fig:probes} shows the distributions: roughly 40\% of long
-probes have received a token by 32\,s under Queue-Only and Aging,
-while the remaining probes wait substantially longer. Appendix
+probes have received a token by 35\,s under Queue-Only and Aging,
+while the remaining 60\% wait more than 50\,s. Appendix
 \ref{app:example} follows several of these requests through one block.
 
 \begin{table}[t]

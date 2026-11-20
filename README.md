@@ -151,7 +151,7 @@ These heuristics aim to improve responsiveness and mitigate long-request delays,
 | `tests/` | Workload, metrics, aggregation, and scheduler unit tests |
 | `workload/` | Synthetic workload generation |
 | `benchmarks/` | Streaming benchmark client and metric collection |
-| `scripts/` | Preliminary CPU baseline scripts |
+| `scripts/` | CPU baseline scripts and drivers for the Modal follow-up batches |
 | `results/modal_matched/` | Current Modal plans, calibration traces, and per-run artifacts |
 | `results/modal_matched_analysis/` | Audited CSVs, paired results, and billing records |
 | `results/test_report.txt` | Full unit-test verification and per-file counts |
